@@ -29,6 +29,10 @@ build/
 local.properties
 *.iml
 
+# Visual Studio Code
+#
+.vscode/
+
 # node.js
 #
 node_modules/
@@ -56,4 +60,14 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
+Pods/
+
+# Bob
+dist/
+
+# OCaml / Reason
+**/.merlin
+**/lib/bs
+**/lib/ocaml
+*.bs.js
+.bsb.lock

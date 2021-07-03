@@ -1,16 +1,18 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, { useEffect } from "react";
+import { Text } from "react-native";
+import RNBootSplash from "react-native-bootsplash";
 
-const App = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Hello, world!</Text>
-    </View>
-  );
-};
-export default App;
+export default function App() {
+  useEffect(() => {
+    const init = async () => {
+      // …do multiple sync or async tasks
+    };
+
+    init().finally(async () => {
+      await RNBootSplash.hide({ fade: true });
+      console.log("Bootsplash has been hidden successfully");
+    });
+  }, []);
+
+  return <Text>My awesome app</Text>;
+}
