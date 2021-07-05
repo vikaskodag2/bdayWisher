@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
-import { Text } from "react-native";
-import RNBootSplash from "react-native-bootsplash";
+import React from 'react';
+import { Provider } from 'mobx-react';
+import HomeScreen from './src/screens/homeScreen';
+import Store from './src/stores/store';
 
-export default function App() {
-  useEffect(() => {
-    const init = async () => {
-      // …do multiple sync or async tasks
-    };
+const App = () => {
+  return (
+    <Provider store={Store}>
+      <HomeScreen />
+    </Provider>
+  );
+};
 
-    init().finally(async () => {
-      await RNBootSplash.hide({ fade: true });
-      console.log("Bootsplash has been hidden successfully");
-    });
-  }, []);
-
-  return <Text>My awesome app</Text>;
-}
+export default App;
