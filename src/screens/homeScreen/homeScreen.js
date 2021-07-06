@@ -1,8 +1,9 @@
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
-import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import RNBootSplash from 'react-native-bootsplash';
 import { DatePicker } from 'react-native-woodpicker';
+import AppHeader from '../../components/header';
 
 class HomeScreen extends Component {
   componentDidMount() {
@@ -11,11 +12,12 @@ class HomeScreen extends Component {
 
   render() {
     const { date, setDate } = this.props.store;
+
     return (
       <SafeAreaView>
         <StatusBar barStyle="light-content" />
+        <AppHeader />
         <View>
-          <Text>Hello World</Text>
           <DatePicker
             value={date}
             onDateChange={setDate}
@@ -29,5 +31,7 @@ class HomeScreen extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({});
 
 export default inject('store')(observer(HomeScreen));
