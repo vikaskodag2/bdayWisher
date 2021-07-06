@@ -2,11 +2,15 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
-const Header = ({ title }) => {
+const Header = ({ title, navigation }) => {
   return (
     <View style={styles.navBar}>
       <View style={styles.leftContainer}>
-        <Button color="#000" icon="menu" />
+        <Button
+          color="#000"
+          icon="menu"
+          onPress={() => navigation.openDrawer()}
+        />
       </View>
       <Text style={styles.middleContainer}>{title}</Text>
     </View>

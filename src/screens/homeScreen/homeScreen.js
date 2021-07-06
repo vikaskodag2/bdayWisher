@@ -12,11 +12,12 @@ class HomeScreen extends Component {
 
   render() {
     const { date, setDate } = this.props.store;
+    const { navigation } = this.props;
 
     return (
       <SafeAreaView>
         <StatusBar barStyle="light-content" />
-        <AppHeader />
+        <AppHeader navigation={navigation} />
         <View>
           <DatePicker
             value={date}
