@@ -1,12 +1,40 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 class Store {
-  @observable date = new Date();
+  @observable selectedDate = new Date();
+  monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
 
   @action
-  setDate = _date => {
-    this.date = _date;
+  setSelectedDate = _date => {
+    console.log('setting date: ', _date);
+    this.selectedDate = _date;
   };
+
+  @computed
+  get getSelectedDate() {
+    let selDate = 'No value Selected';
+
+    if (this.selectedDate) {
+      selDate = `${this.selectedDate.getDate()} ${
+        this.monthNames[this.selectedDate.getMonth()]
+      }`;
+    }
+
+    return selDate;
+  }
 }
 
-export default Store;
+export default new Store();
