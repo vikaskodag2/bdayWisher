@@ -87,10 +87,10 @@ class HomeScreen extends Component {
     }`;
 
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <AppHeader navigation={this.props.navigation} />
-        <View>
+        <View style={styles.datePickerContainer}>
           <View>
             <TouchableOpacity activeOpaticy={1} onPress={this.showDatePicker}>
               <TextInput
@@ -100,6 +100,8 @@ class HomeScreen extends Component {
                 editable={false}
               />
             </TouchableOpacity>
+          </View>
+          <View>
             <DateTimePickerModal
               date={this.date}
               isVisible={this.isDatePickerVisible}
@@ -107,8 +109,10 @@ class HomeScreen extends Component {
               onConfirm={this.handleConfirm}
               onCancel={this.hideDatePicker}
             />
+          </View>
+          <View style={styles.snackbar}>
             <Snackbar
-              duration={7000}
+              duration={2000}
               visible={this.isSnackBarVisible}
               action={{
                 label: 'Dismiss',
@@ -125,6 +129,19 @@ class HomeScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  datePickerContainer: {
+    flex: 1,
+    padding: 15,
+  },
+  snackbar: {
+    flex: 1,
+    bottom: 1,
+  },
+});
 
 export default HomeScreen;
