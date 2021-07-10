@@ -1,35 +1,124 @@
-import { inject, observer } from 'mobx-react';
+import { action, makeObservable, observable } from 'mobx';
+import { observer } from 'mobx-react';
 import React, { Component } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import { TextInput, Snackbar } from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';
-import { DatePicker } from 'react-native-woodpicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AppHeader from '../../components/header';
 
-@inject('store')
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
 @observer
 class HomeScreen extends Component {
+  date = new Date();
+  isDatePickerVisible = false;
+  isSnackBarVisible = false;
+
+  constructor(props) {
+    super(props);
+
+    makeObservable(this, {
+      date: observable,
+      isDatePickerVisible: observable,
+      isSnackBarVisible: observable,
+      setDate: action,
+      setIsDatePickerVisible: action,
+      setIsSnackBarVisible: action,
+    });
+  }
+
   componentDidMount() {
     RNBootSplash.hide({ fade: true });
   }
 
+  setDate = _date => {
+    this.date = _date;
+  };
+
+  setIsDatePickerVisible = _visible => {
+    this.isDatePickerVisible = _visible;
+  };
+
+  setIsSnackBarVisible = _visible => {
+    console.log('setIsSnackBarVisible: ', _visible);
+    this.isSnackBarVisible = _visible;
+  };
+
+  showDatePicker = () => {
+    console.log('showDatePicker called');
+    this.setIsDatePickerVisible(true);
+  };
+
+  hideDatePicker = () => {
+    console.log('hideDatePicker called');
+    this.setIsDatePickerVisible(false);
+  };
+
+  handleConfirm = date => {
+    console.log('handleConfirm called with date: ', date);
+    this.hideDatePicker();
+    this.setIsSnackBarVisible(true);
+    this.setDate(date);
+  };
+
   render() {
-    const { store } = this.props;
-    const { navigation } = this.props;
-    console.log('store: ', store.selectedDate, store.getSelectedDate);
+    const dateValue = `${this.date.getDate()} ${
+      monthNames[this.date.getMonth()]
+    }`;
+
     return (
       <SafeAreaView>
         <StatusBar barStyle="light-content" />
-        <AppHeader navigation={navigation} />
+        <AppHeader navigation={this.props.navigation} />
         <View>
-          <DatePicker
-            value={store.selectedDate}
-            onDateChange={date => store.setSelectedDate(date)}
-            title="Date Picker"
-            text={store.getSelectedDate}
-            isNullable
-            androidDisplay="calendar"
-            androidMode="calendar"
-          />
+          <View>
+            <TouchableOpacity activeOpaticy={1} onPress={this.showDatePicker}>
+              <TextInput
+                label="Select Date"
+                mode="outlined"
+                value={dateValue}
+                editable={false}
+              />
+            </TouchableOpacity>
+            <DateTimePickerModal
+              date={this.date}
+              isVisible={this.isDatePickerVisible}
+              mode="date"
+              onConfirm={this.handleConfirm}
+              onCancel={this.hideDatePicker}
+            />
+            <Snackbar
+              duration={7000}
+              visible={this.isSnackBarVisible}
+              action={{
+                label: 'Dismiss',
+                onPress: () => this.setIsSnackBarVisible(false),
+              }}
+              onDismiss={() => this.setIsSnackBarVisible(false)}
+            >
+              {`Date Selected is ${dateValue}`}
+            </Snackbar>
+          </View>
         </View>
       </SafeAreaView>
     );

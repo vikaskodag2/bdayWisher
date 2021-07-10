@@ -1,8 +1,12 @@
 import { observable, action, computed } from 'mobx';
 
 class Store {
+  /* 
+    Not used bcoz i couldnt fix the issue of mobx store integration with react classes
+    TODO: Fix the store and figure out how to use computed
+  */
   @observable selectedDate = new Date();
-  monthNames = [
+  @observable monthNames = [
     'Jan',
     'Feb',
     'Mar',
@@ -23,18 +27,18 @@ class Store {
     this.selectedDate = _date;
   };
 
-  @computed
-  get getSelectedDate() {
-    let selDate = 'No value Selected';
+  // @computed
+  // get getSelectedDate() {
+  //   let selDate = 'No value Selected';
 
-    if (this.selectedDate) {
-      selDate = `${this.selectedDate.getDate()} ${
-        this.monthNames[this.selectedDate.getMonth()]
-      }`;
-    }
+  //   if (this.selectedDate) {
+  //     selDate = `${this.selectedDate.getDate()} ${
+  //       this.monthNames[this.selectedDate.getMonth()]
+  //     }`;
+  //   }
 
-    return selDate;
-  }
+  //   return selDate;
+  // }
 }
 
 export default new Store();
