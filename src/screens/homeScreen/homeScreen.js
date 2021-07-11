@@ -12,6 +12,7 @@ import { TextInput, Snackbar } from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AppHeader from '../../components/header';
+import readCSV from '../../utils/fileReader';
 
 const monthNames = [
   'Jan',
@@ -28,11 +29,14 @@ const monthNames = [
   'Dec',
 ];
 
+const csvFilePath = '../../assets/data.csv';
+
 @observer
 class HomeScreen extends Component {
   date = new Date();
   isDatePickerVisible = false;
   isSnackBarVisible = false;
+  excelData = {};
 
   constructor(props) {
     super(props);
@@ -44,12 +48,21 @@ class HomeScreen extends Component {
       setDate: action,
       setIsDatePickerVisible: action,
       setIsSnackBarVisible: action,
+      excelData: observable,
+      setExcelData: action,
     });
+
+    this.readExcelData();
   }
 
   componentDidMount() {
     RNBootSplash.hide({ fade: true });
   }
+
+  readExcelData = async () => {
+    const parsedData = await readCSV(csvFilePath);
+    this.setExcelData(parsedData);
+  };
 
   setDate = _date => {
     this.date = _date;
@@ -62,6 +75,10 @@ class HomeScreen extends Component {
   setIsSnackBarVisible = _visible => {
     console.log('setIsSnackBarVisible: ', _visible);
     this.isSnackBarVisible = _visible;
+  };
+
+  setExcelData = _data => {
+    this.excelData = _data;
   };
 
   showDatePicker = () => {
@@ -85,7 +102,7 @@ class HomeScreen extends Component {
     const dateValue = `${this.date.getDate()} ${
       monthNames[this.date.getMonth()]
     }`;
-
+    console.log('excel data: ', typeof this.excelData);
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
