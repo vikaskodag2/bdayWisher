@@ -12,6 +12,7 @@ import { TextInput, Snackbar } from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AppHeader from '../../components/header';
+import EventList from '../../components/flatList';
 import monthNames from '../../assets/data/month';
 
 @observer
@@ -77,7 +78,7 @@ class HomeScreen extends Component {
         <StatusBar barStyle="light-content" />
         <AppHeader navigation={this.props.navigation} />
         <View style={styles.datePickerContainer}>
-          <View>
+          <View style={{}}>
             <TouchableOpacity activeOpaticy={1} onPress={this.showDatePicker}>
               <TextInput
                 label="Select Date"
@@ -110,7 +111,9 @@ class HomeScreen extends Component {
             </Snackbar>
           </View>
         </View>
-        <View style={styles.eventListContainer}></View>
+        <View style={styles.eventListContainer}>
+          <EventList />
+        </View>
       </SafeAreaView>
     );
   }
@@ -122,7 +125,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   datePickerContainer: {
-    flex: 1,
     padding: 15,
   },
   snackbar: {

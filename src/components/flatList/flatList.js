@@ -1,20 +1,18 @@
 import React from 'react';
-import {
-  FlatList,
-  Dimensions,
-  View,
-  Image,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
-import FlatListItem from './flatListItem';
+import { FlatList, View, StyleSheet, Image } from 'react-native';
+import Animated from 'react-native-reanimated';
+import ListItem from './flatListItem';
 import excelData from '../../assets/data/data';
 
-const { width, height } = Dimensions.get('screen');
 const BG_IMG =
   'https://www.pexels.com/photo/pink-rose-closeup-photography-1231265/';
 
-export default () => {
+const SPACING = 20;
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
+const EventList = () => {
+  const scrollY = React.useRef(new Animated.Value(0)).current;
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <Image
@@ -22,10 +20,18 @@ export default () => {
         style={StyleSheet.absoluteFillObject}
         blurRadius={80}
       />
-      <FlatList
+      <AnimatedFlatList
         data={excelData}
-        keyExtractor={item => item.timestamp}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true },
+        )}
+        keyExtractor={item => item.fullName}
         contentContainerStyle={styles.container}
+        // initialNumToRender={7}
+        renderItem={({ item, index }) => (
+          <ListItem item={item} index={index} scrollY={scrollY} />
+        )}
       />
     </View>
   );
@@ -33,7 +39,8 @@ export default () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingTop: StatusBar.currentHeight || 42,
+    padding: SPACING,
   },
 });
+
+export default EventList;
