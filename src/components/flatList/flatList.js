@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     padding: SPACING * 2,
     fontSize: 16,
     fontStyle: 'italic',
+    alignSelf: 'center',
   },
 });
 

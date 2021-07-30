@@ -6,7 +6,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import { Divider } from 'react-native-paper';
+import { Divider, ActivityIndicator } from 'react-native-paper';
 import EventList from '../flatList';
 import excelData from '../../assets/data/data';
 import monthNames from '../../assets/data/month';
@@ -30,6 +30,11 @@ const getData = (activeTab, date) => {
 
 const ListContainer = ({ date }) => {
   const [activeTab, setActiveTab] = React.useState('Birthday');
+  // TODO Added loader when list is re-processed
+  const [isDataLoading, setIsDataLoading] = React.useState(false);
+
+  const data = getData(activeTab, date);
+  // setIsDataLoading(false);
 
   return (
     <View style={{ flex: 1 }}>
@@ -72,7 +77,7 @@ const ListContainer = ({ date }) => {
       </View>
       <Divider />
       <View style={styles.eventListContainer}>
-        <EventList data={getData(activeTab, date)} />
+        {isDataLoading ? <ActivityIndicator /> : <EventList data={data} />}
       </View>
     </View>
   );
@@ -98,6 +103,7 @@ const styles = StyleSheet.create({
     borderColor: '#EBEBEB',
     padding: 10,
     justifyContent: 'center',
+    borderRadius: 12,
   },
   listTabItemText: {
     fontSize: 16,

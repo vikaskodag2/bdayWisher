@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { Divider } from 'react-native-paper';
 
 const SPACING = 20;
 const ITEM_SIZE = 30 + SPACING * 3;
@@ -24,6 +25,7 @@ const FlatListItem = ({ item, index, scrollY }) => {
       <View style={styles.itemName}>
         <Text style={styles.nameText}>{item.fullName}</Text>
       </View>
+      <Divider />
       <View style={styles.itemData}>
         <Text style={styles.itemUnit}>{item.unitNumber}</Text>
         <Text style={styles.itemGender}>{item.Gender}</Text>
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
   },
   itemName: {
     flex: 1,
+    paddingBottom: SPACING / 4,
   },
   nameText: {
     fontSize: 22,
@@ -60,6 +63,8 @@ const styles = StyleSheet.create({
   itemData: {
     flex: 2,
     flexDirection: 'row',
+    paddingBottom: SPACING / 4,
+    paddingTop: SPACING / 4,
   },
   itemUnit: {
     opacity: 0.7,
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     fontSize: 18,
     fontStyle: 'italic',
-    color: '#0099cc',
+    color: '#2d8cff',
   },
 });
 
