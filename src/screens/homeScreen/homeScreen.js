@@ -7,12 +7,15 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  Dimensions,
+  Text,
 } from 'react-native';
 import { TextInput, Snackbar } from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
 import AppHeader from '../../components/header';
-import EventList from '../../components/flatList';
+import ListContainer from '../../components/listContainer';
 import monthNames from '../../assets/data/month';
 
 @observer
@@ -78,7 +81,7 @@ class HomeScreen extends Component {
         <StatusBar barStyle="light-content" />
         <AppHeader navigation={this.props.navigation} />
         <View style={styles.datePickerContainer}>
-          <View style={{}}>
+          <View>
             <TouchableOpacity activeOpaticy={1} onPress={this.showDatePicker}>
               <TextInput
                 label="Select Date"
@@ -97,22 +100,22 @@ class HomeScreen extends Component {
               onCancel={this.hideDatePicker}
             />
           </View>
-          <View style={styles.snackbar}>
-            <Snackbar
-              duration={2000}
-              visible={this.isSnackBarVisible}
-              action={{
-                label: 'Dismiss',
-                onPress: () => this.setIsSnackBarVisible(false),
-              }}
-              onDismiss={() => this.setIsSnackBarVisible(false)}
-            >
-              {`Date Selected is ${dateValue}`}
-            </Snackbar>
-          </View>
         </View>
-        <View style={styles.eventListContainer}>
-          <EventList />
+        <View style={{ flex: 1 }}>
+          <ListContainer date={this.date} />
+        </View>
+        <View style={styles.snackbar}>
+          <Snackbar
+            duration={2000}
+            visible={this.isSnackBarVisible}
+            action={{
+              label: 'Dismiss',
+              onPress: () => this.setIsSnackBarVisible(false),
+            }}
+            onDismiss={() => this.setIsSnackBarVisible(false)}
+          >
+            {`Date Selected is ${dateValue}`}
+          </Snackbar>
         </View>
       </SafeAreaView>
     );
@@ -128,11 +131,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   snackbar: {
-    flex: 1,
     bottom: 1,
-  },
-  eventListContainer: {
-    flex: 1,
   },
 });
 
