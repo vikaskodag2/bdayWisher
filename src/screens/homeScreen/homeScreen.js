@@ -50,22 +50,18 @@ class HomeScreen extends Component {
   };
 
   setIsSnackBarVisible = _visible => {
-    console.log('setIsSnackBarVisible: ', _visible);
     this.isSnackBarVisible = _visible;
   };
 
   showDatePicker = () => {
-    console.log('showDatePicker called');
     this.setIsDatePickerVisible(true);
   };
 
   hideDatePicker = () => {
-    console.log('hideDatePicker called');
     this.setIsDatePickerVisible(false);
   };
 
   handleConfirm = date => {
-    console.log('handleConfirm called with date: ', date);
     this.hideDatePicker();
     this.setIsSnackBarVisible(true);
     this.setDate(date);

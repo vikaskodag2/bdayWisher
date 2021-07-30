@@ -71,3 +71,6 @@ dist/
 **/lib/ocaml
 *.bs.js
 .bsb.lock
+
+
+**/data.js

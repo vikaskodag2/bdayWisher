@@ -8,6 +8,25 @@ import {
 } from 'react-native';
 import { Divider } from 'react-native-paper';
 import EventList from '../flatList';
+import excelData from '../../assets/data/data';
+import monthNames from '../../assets/data/month';
+
+const getData = (activeTab, date) => {
+  let data = excelData;
+
+  if (activeTab === 'Birthday') {
+    data = data
+      .filter(item => item.birthMonth === monthNames[date.getMonth()])
+      .filter(item => item.birthDate === date.getDate());
+  }
+
+  if (activeTab === 'Anniversary') {
+    data = data
+      .filter(item => item.marriageMonth === monthNames[date.getMonth()])
+      .filter(item => item.marriageDate === date.getDate());
+  }
+  return data;
+};
 
 const ListContainer = ({ date }) => {
   const [activeTab, setActiveTab] = React.useState('Birthday');
@@ -53,7 +72,7 @@ const ListContainer = ({ date }) => {
       </View>
       <Divider />
       <View style={styles.eventListContainer}>
-        <EventList />
+        <EventList data={getData(activeTab, date)} />
       </View>
     </View>
   );
