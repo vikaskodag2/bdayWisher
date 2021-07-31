@@ -1,27 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { View, StyleSheet, Text, Platform, Linking } from 'react-native';
+import { Button } from 'react-native-paper';
 import { Divider } from 'react-native-paper';
+import { sendMsg } from '../../utility/utilityfn';
 
 const SPACING = 20;
-const ITEM_SIZE = 30 + SPACING * 3;
 
-const FlatListItem = ({ item, index, scrollY }) => {
-  const inputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 2)];
-  const opacityInputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 1)];
-  const scale = scrollY.interpolate({
-    inputRange,
-    outputRange: [1, 1, 1, 0],
-  });
-  const opacity = scrollY.interpolate({
-    inputRange: opacityInputRange,
-    outputRange: [1, 1, 1, 0],
-  });
-
+const FlatListItem = ({ item, type }) => {
   return (
-    <Animated.View
-      style={{ ...styles.listItemContainer, transform: [{ scale }], opacity }}
-    >
+    <View style={styles.listItemContainer}>
       <View style={styles.itemName}>
         <Text style={styles.nameText}>{item.fullName}</Text>
       </View>
@@ -30,7 +17,17 @@ const FlatListItem = ({ item, index, scrollY }) => {
         <Text style={styles.itemUnit}>{item.unitNumber}</Text>
         <Text style={styles.itemGender}>{item.Gender}</Text>
       </View>
-    </Animated.View>
+      <Divider />
+      <View style={styles.buttons}>
+        <Button
+          mode="contained"
+          style={styles.buttonText}
+          onPress={() => sendMsg(item, type)}
+        >
+          Send SMS
+        </Button>
+      </View>
+    </View>
   );
 };
 
@@ -76,6 +73,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
     color: '#2d8cff',
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: SPACING / 2,
+  },
+  buttonText: {
+    // borderRadius: 12,
   },
 });
 
