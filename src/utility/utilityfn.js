@@ -19,10 +19,23 @@ export const getData = (activeTab, date) => {
   return data;
 };
 
+const wishingMsgs = [
+  'Count not the candles, see the light they give. Count not the years, but the life you live. Wishing you a wonderful time ahead.',
+  'Eternal Stability of mind can be attained by connecting with eternal God.',
+  'Judgements and Assumptions slowly poison Devotion.',
+  'Our choice determines what to learn and what to leave.',
+  'The aim of true seeker is to be one with ONE.',
+  'Dissolution of ego is the beginning of True Learning.',
+  'A nirankari is a ‘Sant’, trying to lead a simple saintly life at all times, in all places and among all relationships.',
+  'No knowledge is complete till it comes to fruition through action.',
+];
+
 export const getSMSBody = (name, type) => {
+  const idx = Math.floor(Math.random() * wishingMsgs.length);
+  const msg = wishingMsgs[idx];
   return `Dhan Nirankar ${name} Ji 
 
-Count not the candles..see the light they give. Count not the years, but the life you live. Wishing you a wonderful time ahead.
+${msg}
 Happy ${type} 
 
 Popat Taware 
