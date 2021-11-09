@@ -25,7 +25,7 @@ This app was created using React Native.
 Main objective of this app was to wish Nirankari Saints on their Birthday and Anniversary events. The Messages were taken from the Discourses of Satguru. This app allows us to send wishes through either SMS or through Whatsapp.
 
 ## Sample Data
-`{<br />
+{<br />
   Timestamp: '30/01/2021 15:27:35',<br />
   unitNumber: 'xxxx - Unit Location',<br />
   fullName: 'Loren Ipsum',<br />
@@ -39,4 +39,4 @@ Main objective of this app was to wish Nirankari Saints on their Birthday and An
   marriageDate: 1,<br />
   marriageMonth: 'June',<br />
   'Marriage Year': 1990,<br />
-}`
+}
