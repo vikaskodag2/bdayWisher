@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, Platform, Linking } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Divider } from 'react-native-paper';
-import { sendMsg } from '../../utility/utilityfn';
+import { sendMsg, sendWhatsApp } from '../../utility/utilityfn';
 
 const SPACING = 20;
 
@@ -25,6 +25,13 @@ const FlatListItem = ({ item, type }) => {
           onPress={() => sendMsg(item, type)}
         >
           Send SMS
+        </Button>
+        <Button
+          mode="contained"
+          style={styles.buttonText}
+          onPress={() => sendWhatsApp(item, type)}
+        >
+          Send Whatsapp
         </Button>
       </View>
     </View>
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingTop: SPACING / 2,
   },
   buttonText: {
