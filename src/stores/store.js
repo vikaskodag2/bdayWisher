@@ -1,7 +1,7 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx';
 
 class Store {
-  /* 
+  /*
     Not used bcoz i couldnt fix the issue of mobx store integration with react classes
     TODO: Fix the store and figure out how to use computed
   */

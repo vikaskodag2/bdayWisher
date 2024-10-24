@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Platform, Linking } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Divider } from 'react-native-paper';
 import { sendMsg, sendWhatsApp } from '../../utility/utilityfn';

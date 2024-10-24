@@ -16,10 +16,7 @@ This app was created using React Native.
 - run `npm run android`
 
 ### Build Project
-- delete 'android/app/src/main/res/drawable-*' directories
-- delete 'android/app/src/main/res/raw' directory
-- run `npm run bundle`
-- run `npm run build`
+- run `npm run build-apk`
 - get the apk from 'android/app/build/output/apk/debug'
 
 ## Project Info

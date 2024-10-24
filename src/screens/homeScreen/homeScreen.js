@@ -7,8 +7,6 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Dimensions,
-  Text,
 } from 'react-native';
 import { TextInput, Snackbar } from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';

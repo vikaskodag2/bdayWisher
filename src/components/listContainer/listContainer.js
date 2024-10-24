@@ -45,6 +45,7 @@ const ListContainer = ({ date }) => {
               activeTab === 'Anniversary' && styles.listTabItemActive,
             ]}
             onPress={() => setActiveTab('Anniversary')}
+            disabled={true}
           >
             <Text
               style={[

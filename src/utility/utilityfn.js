@@ -7,7 +7,7 @@ export const getData = (activeTab, date) => {
 
   if (activeTab === 'Birthday') {
     data = data
-      .filter(item => item.birthMonth === monthNames[date.getMonth()])
+      .filter(item => item.birthMonth === date.getMonth() + 1)
       .filter(item => item.birthDate === date.getDate());
   }
 
@@ -18,6 +18,21 @@ export const getData = (activeTab, date) => {
   }
   return data;
 };
+
+const bdayWishingMsgs = [
+  `प्यार की मूरत, ज्ञान की सूरत, तुम्हे देख प्रतीत हुआ।
+आनंद में बीता समय सुहाना, जो तुम संग व्यतीत हुआ।
+जन्मदिन मुबारक आपको संतों, आपका जीवन मधुर संगीत हुआ।`,
+  `प्यार भरा एक सुंदर जीवन, और पुरुषार्थ का तुम हो दर्पण।
+खुशियों भरा हो हर एक पल, न हो दुख का एक भी घर्षण।
+आज आप का है जन्मदिन, ये तुकबंदी आप को अर्पण।`,
+  `🙏प्यार मिला है निरंकार का, इस प्यार की है ना कोई कीमत
+ज्ञान, बुद्धि, विवेक की बनी रहे सदा आप पर रहमत।`,
+  `सबमें देखा प्रभु का नूर, नही आप में कोई गुरूर
+नम्र भाव से सेवा की है, आनंद पाया है भरपूर
+आगे से आगे बढ़ते जाना, अहंकार रहे आप से दूर
+जन्मदिन के शुभ अवसर पे, पेड़ लगाना है जरूर।`,
+];
 
 const wishingMsgs = [
   'जब कोई जुकता है तो समझना चाहिए की वह ऊंचाई की तरफ जा रहा है|',
@@ -33,11 +48,13 @@ const wishingMsgs = [
 ];
 
 export const getSMSBody = (name, type) => {
-  const idx = Math.floor(Math.random() * wishingMsgs.length);
-  const msg = wishingMsgs[idx];
+  const idx = Math.floor(Math.random() * bdayWishingMsgs.length);
+  const msg = bdayWishingMsgs[idx];
   return `🙏🙏🌹 धन निरंकार जी 🌹🙏🙏
 आदरनिय ${name} Ji 🌹
+
 ${msg}
+
 आपको ${type} की लाख लाख बधाइयां 🥳🥳🎂🎂🌹🌹
 इस दिन को यादगार बनाएँ, पृथ्वी बचाएँ - पेड़ लगाएँ|
 
@@ -48,6 +65,10 @@ ${msg}
 };
 
 export const sendMsg = (item, type) => {
+  if (item.mobileNumber.toString().length !== 10) {
+    alert('Mobile no not found!');
+    return;
+  }
   const url =
     Platform.OS === 'android'
       ? `sms:+91${item.mobileNumber.toString(10)}?body=${getSMSBody(
@@ -69,10 +90,14 @@ export const sendMsg = (item, type) => {
 
 export const sendWhatsApp = (item, type) => {
   let msg = getSMSBody(item.fullName, type);
+  if (item.mobileNumber.toString().length !== 10) {
+    alert('Mobile no not found!');
+    return;
+  }
   let phoneWithCountryCode = `91${item.mobileNumber.toString(10)}`;
 
   let mobile =
-    Platform.OS == 'ios' ? phoneWithCountryCode : '+' + phoneWithCountryCode;
+    Platform.OS === 'ios' ? phoneWithCountryCode : '+' + phoneWithCountryCode;
   if (mobile) {
     if (msg) {
       let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
