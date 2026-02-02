@@ -4,7 +4,7 @@ This app was created using React Native.
 
 ## Setup
 
-### Prerequisites
+### Pre-Requisites
 - Setup and install react and react native.
 - Download Android Studio and an emulator in Android Studio
 
@@ -17,25 +17,20 @@ This app was created using React Native.
 
 ### Build Project
 - run `npm run build-apk`
-- get the apk from 'android/app/build/output/apk/debug'
+- get the apk from `android/app/build/output/apk/release`
 
 ## Project Info
 
 Main objective of this app was to wish Nirankari Saints on their Birthday and Anniversary events. The Messages were taken from the Discourses of Satguru. This app allows us to send wishes through either SMS or through Whatsapp.
 
 ## Sample Data
-{<br />
-  Timestamp: '30/01/2021 15:27:35',<br />
-  unitNumber: 'xxxx - Unit Location',<br />
-  fullName: 'Loren Ipsum',<br />
-  Gender: 'Male',<br />
-  mobileNumber: 9999999999,<br />
-  birthDate: 1,<br />
-  birthMonth: 'June',<br />
-  'Birth Year': 1990,<br />
-  'Marital Status': 'Married',<br />
-  'Husband/Wife Name': 'Loren Ipsumi',<br />
-  marriageDate: 1,<br />
-  marriageMonth: 'June',<br />
-  'Marriage Year': 1990,<br />
-}
+`{
+  unitNumber: '0001-Test',
+  fullName: 'Lorem Ipsum',
+  DOB: '01/01/03',
+  mobileNumber: 0000000000,
+  gender: 'Male',
+  birthDate: 01,
+  birthMonth: 01,
+  birthYear: 2003,
+}`
